@@ -1,6 +1,48 @@
 namespace Test_Project;
 
 [TestClass]
+public class IsNumericTests
+{
+    [TestMethod]
+    public void IsNumeric_ValidNumericString_ReturnsTrue()
+    {
+        // Arrange
+        string number = "12345";
+
+        // Act
+        bool result = ValidationLogic.IsNumeric(number);
+
+        // Assert
+        Assert.IsTrue(result);
+    }
+
+    [TestMethod]
+    public void IsNumeric_ValidNonNumericString_ReturnsFalse()
+    {
+        // Arrange
+        string number = "abc123";
+
+        // Act
+        bool result = ValidationLogic.IsNumeric(number);
+
+        // Assert
+        Assert.IsFalse(result);
+    }
+
+    [TestMethod]
+    public void IsNumeric_EmptyString_ReturnsFalse()
+    {
+        // Arrange
+        string number = "";
+
+        // Act
+        bool result = ValidationLogic.IsNumeric(number);
+
+        // Assert
+        Assert.IsFalse(result);
+    }
+
+[TestClass]
 public class UnitTest1
 {
     [TestMethod]
