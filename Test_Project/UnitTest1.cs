@@ -124,5 +124,39 @@ public class UnitTest1
 
         return totPrijs;
     }
+}
+[TestClass]
+public class UnitTest1
+{
+    [TestMethod]
+    public void IsValidPassword_ValidPassword_ReturnsTrue()
+    {
+        string password = "Abcdef1";
+        bool isValid = ValidationLogic.IsValidPassword(password);
+        Assert.IsTrue(isValid);
+    }
 
+    [TestMethod]
+    public void IsValidPassword_MissingNumber_ReturnsFalse()
+    {
+        string password = "Abcdefg";
+        bool isValid = ValidationLogic.IsValidPassword(password);
+        Assert.IsFalse(isValid);
+    }
+
+    [TestMethod]
+    public void IsValidPassword_MissingUppercase_ReturnsFalse()
+    {
+        string password = "abcdefg";
+        bool isValid = ValidationLogic.IsValidPassword(password);
+        Assert.IsFalse(isValid);
+    }
+
+    [TestMethod]
+    public void IsValidPassword_PasswordTooShort_ReturnsFalse()
+    {
+        string password = "short";
+        bool isValid = ValidationLogic.IsValidPassword(password);
+        Assert.IsFalse(isValid);
+    }   
 }
