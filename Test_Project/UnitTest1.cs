@@ -20,7 +20,6 @@ public class UnitTest1
 
         Assert.AreEqual(result, true);
     }
-
     [TestMethod]
     public void TestMethod3()
     {
@@ -30,13 +29,24 @@ public class UnitTest1
         int onder12 = 2; // 2 people under 12
         int wineCount = 3; // 3 people want wine
 
-        decimal gangenmenu_2 = 15.50M;
-        decimal gangenmenu_3 = 20.50M;
-        decimal gangenmenu_4 = 25.50M;
-        decimal discount = 0.1M;
-        decimal wijn_arrangement = 12.50M; // onthoud de json file moet wel deze data's hebben anders zal hij niet werken (gegevens zijn nu zoals wij hem hadden in json)
+        decimal gangenmenu_2 = 25.0M;
+        decimal gangenmenu_3 = 35.0M;
+        decimal gangenmenu_4 = 45.0M;
+        decimal discount = 0.1M; // 10% discount
+        decimal wijn_arrangement = 10.0M; // vanuit gaande dat de waardes kloppen, zo niet pas in json die value's of pas hier ff de values naar de juiste aan
 
-        decimal expectedTotalPrice = gangenmenu_3 * aantal - gangenmenu_3 * onder12 * (1 - discount) + wijn_arrangement * wineCount;
+        decimal expectedTotalPrice = gangenmenu_3 * aantal;
+
+        // Calculate the discount for people under 12
+        decimal korting = gangenmenu_3 * onder12 * discount;
+        expectedTotalPrice -= korting;
+
+        // Include the wine price
+        if (wineCount > 0)
+        {
+            decimal wijnprijs = wijn_arrangement * wineCount;
+            expectedTotalPrice += wijnprijs;
+        }
 
         // Act
         var calculator = new PrijsCalculator();
