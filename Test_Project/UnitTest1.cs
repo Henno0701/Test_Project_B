@@ -1,4 +1,4 @@
-namespace Test_Project; 
+namespace Test_Project;
 
 [TestClass]
 public class UnitTest1
@@ -19,6 +19,31 @@ public class UnitTest1
         bool result = ValidationLogic.IsValidPassword(password);
 
         Assert.AreEqual(result, true);
+    }
+
+    [TestMethod]
+    public void TestMethod3()
+    {
+        // Arrange
+        int aantal = 5;
+        int selectedMenu = 3; // Assuming 3-course menu
+        int onder12 = 2; // 2 people under 12
+        int wineCount = 3; // 3 people want wine
+
+        decimal gangenmenu_2 = 15.50M;
+        decimal gangenmenu_3 = 20.50M;
+        decimal gangenmenu_4 = 25.50M;
+        decimal discount = 0.1M;
+        decimal wijn_arrangement = 12.50M; // onthoud de json file moet wel deze data's hebben anders zal hij niet werken (gegevens zijn nu zoals wij hem hadden in json)
+
+        decimal expectedTotalPrice = gangenmenu_3 * aantal - gangenmenu_3 * onder12 * (1 - discount) + wijn_arrangement * wineCount;
+
+        // Act
+        var calculator = new PrijsCalculator();
+        decimal totalPrice = calculator.Prijs(aantal, selectedMenu, onder12, wineCount);
+
+        // Assert
+        Assert.AreEqual(expectedTotalPrice, totalPrice);
     }
 
     [TestMethod]
@@ -90,5 +115,5 @@ public class UnitTest1
         string password = "short";
         bool isValid = ValidationLogic.IsValidPassword(password);
         Assert.IsFalse(isValid);
-    }   
+    }
 }
